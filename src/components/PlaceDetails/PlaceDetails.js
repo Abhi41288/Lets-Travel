@@ -48,11 +48,12 @@ function PlaceDetails({ place, selected, refProp }) {
           <Typography variant="subtitle1">Ranking</Typography>
           <Typography variant="subtitle1">{place.ranking}</Typography>
         </Box>
-        {place?.awards?.map((award) => (
+        {place?.awards?.map((award, i) => (
           <Box
             display="flex"
             justifyContent="space-between"
             alignItems="center"
+            key={i}
           >
             <img src={award.images.small} alt={award.display_name} />
             <Typography variant="subtitle2" color="textSecondary">

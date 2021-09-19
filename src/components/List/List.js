@@ -12,19 +12,27 @@ import PlaceDetails from "../PlaceDetails/PlaceDetails";
 
 import useStyles from "./styles";
 
-function List({ places, clickedChild, isLoading }) {
+function List({
+  places,
+  clickedChild,
+  isLoading,
+  type,
+  setType,
+  rating,
+  setRating,
+}) {
   const classes = useStyles();
-  const [type, setType] = useState("restaurants");
-  const [rating, setRating] = useState("");
+
   const [elRefs, setElRefs] = useState([]);
 
   useEffect(() => {
-    const refs = Array(places?.length)
-      .fill()
-      .map((_, i) => elRefs[i] || createRef());
-    setElRefs(refs);
+    setElRefs((refs) =>
+      Array(places?.length)
+        .fill()
+        .map((_, i) => refs[i] || createRef())
+    );
   }, [places]);
-  console.log({ clickedChild });
+
   return (
     <div className={classes.container}>
       <Typography variant="h4">
@@ -40,7 +48,7 @@ function List({ places, clickedChild, isLoading }) {
             <InputLabel>Type</InputLabel>
             <Select value={type} onChange={(e) => setType(e.target.value)}>
               <MenuItem value="restaurants">Restaurants</MenuItem>
-              <MenuItem value="hotel">Hotel</MenuItem>
+              <MenuItem value="hotels">Hotel</MenuItem>
               <MenuItem value="attractions">Attractions</MenuItem>
             </Select>
           </FormControl>
